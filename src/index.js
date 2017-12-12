@@ -7,12 +7,13 @@ import less from 'less-middleware';
 import bodyParser from 'body-parser';
 import session from 'express-session';
 import passport from 'passport';
+import Strategy from 'passport-twitter';
 import initializeDb from './db';
 import middleware from './middleware';
 import api from './api';
 import web from './web';
-import config from './config.json';
-
+import config from './config/express.json';
+import { serializeUser, deserializeUser, twitterCallback } from './lib/auth';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -26,11 +27,23 @@ app.use(morgan('dev'));
 app.use( cors( { exposedHeaders: config.corsHeaders } ) );
 
 app.use(bodyParser.json( { limit : config.bodyLimit } ) );
-
-app.use(session({secret: 'fox is broken'}));
 app.use(passport.initialize());
-app.use(passport.session());
 
+passport.use(new Strategy({
+  consumerKey: process.env.TWITTER_KEY,
+  consumerSecret: process.env.TWITTER_SECRET,
+  callbackURL: process.env.TWITTER_CALLBACK
+}, twitterCallback));
+
+passport.serializeUser( serializeUser );
+
+passport.deserializeUser( deserializeUser );
+
+app.use(session({
+	secret: 'fox is broken',
+  resave: true,
+  saveUninitialized: true
+}));
 app.use(less(__dirname + 'public/style/less',
 	{ dest: __dirname + 'public/style/css' }, {},
 	{ compress: 'auto'}
