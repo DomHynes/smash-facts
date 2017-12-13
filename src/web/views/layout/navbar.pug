@@ -4,9 +4,17 @@
         button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarResponsive', aria-controls='navbarResponsive', aria-expanded='false', aria-label='Toggle navigation')
             span.navbar-toggler-icon
         #navbarResponsive.collapse.navbar-collapse
-            ul.navbar-nav
-                li.nav-item
-                    a.nav-link(href='../help/') Help
+            if locals.user
+
+                ul.navbar-nav.mr-auto
+                    li.nav-item.dropdown
+                        a.nav-link.dropdown-toggle(data-toggle="dropdown" href="#") Games
+                        .dropdown-menu
+                            a.dropdown-item(href='/games/ssbm') SSBM
+
             ul.nav.navbar-nav.ml-auto
                 li.nav-item
-                    p.nav Built by DomHynes
+                    if locals.user
+                        p.nav #{locals.user.name}
+                    else
+                        a.nav-link(href='../login/twitter') Login

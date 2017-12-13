@@ -1,0 +1,9 @@
+extends ../layout/layout
+
+block content
+    .jumbotron
+        .row
+            .col-md-3
+                img.game-display(src=`/img/boxart/${game.name}.png`)
+            .col-md-9
+                h1 #{game.longName}

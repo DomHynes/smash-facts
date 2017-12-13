@@ -27,23 +27,22 @@ app.use(morgan('dev'));
 app.use( cors( { exposedHeaders: config.corsHeaders } ) );
 
 app.use(bodyParser.json( { limit : config.bodyLimit } ) );
-app.use(passport.initialize());
 
 passport.use(new Strategy({
   consumerKey: process.env.TWITTER_KEY,
   consumerSecret: process.env.TWITTER_SECRET,
   callbackURL: process.env.TWITTER_CALLBACK
 }, twitterCallback));
-
 passport.serializeUser( serializeUser );
-
 passport.deserializeUser( deserializeUser );
-
 app.use(session({
 	secret: 'fox is broken',
   resave: true,
   saveUninitialized: true
 }));
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(less(__dirname + 'public/style/less',
 	{ dest: __dirname + 'public/style/css' }, {},
 	{ compress: 'auto'}

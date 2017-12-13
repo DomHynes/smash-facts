@@ -1,3 +1,5 @@
+import passport from 'passport';
+
 export function login (req, res) {
-  res.render('auth/login', { title: 'Login' });
+  return passport.authenticate('twitter');
 }
