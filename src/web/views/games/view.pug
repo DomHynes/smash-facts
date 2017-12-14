@@ -7,3 +7,15 @@ block content
                 img.game-display(src=`/img/boxart/${game.name}.png`)
             .col-md-9
                 h1 #{game.longName}
+                table.table
+                    thead
+                        tr
+                            th(scope="col") Fact
+                            th(scope="col") Relevant Characters
+                            th(scope="col") Added By
+                    tbody
+                    each fact in facts
+                        tr
+                            td #{fact.fact}
+                            td #{fact.characterNameList}
+                            td #{fact.submitted_by.name}

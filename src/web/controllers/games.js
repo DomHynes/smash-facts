@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import games from '../../models/games';
+import facts from '../../models/facts';
 
 export default ({ config, db }) => {
   const router = Router();
@@ -11,11 +12,27 @@ export default ({ config, db }) => {
   });
 
   router.get('/:name', (req, res) => {
-    games.findOne({name: req.params.name}).exec()
+    let payload = {};
+    games.findOne({name: req.params.name}).populate('characters').exec()
       .then( game => {
-        res.render('games/view', { title: game.longName, game, })
+        payload.game = game;
+        return facts.find({games: game._id })
+        .populate('characters')
+        .populate('games')
+        .populate('submitted_by').exec()
       })
-      .catch( e => res.redirect('/'));
+      .then( facts => {
+        payload.facts = facts;
+        payload.facts.forEach( fact => {
+          fact.characterNameList = fact.characters.map(char => char.name).join(', ');
+        });
+        res.render('games/view', {
+          title: payload.game.longName,
+          game: payload.game,
+          facts: payload.facts
+        });
+      })
+      .catch( e => { console.log(e); res.redirect('/');});
   })
 
   return router;
