@@ -15,7 +15,7 @@ block content
             each char in chars
                 .form-check.col-sm-3
                     label.form-check-label
-                        input.form-check-input(id=`${char.name}` type="checkbox" value=#{game._id})
+                        input.form-check-input(id=`${char.name}` type="checkbox" value="#{game._id}")
                         |   #{char.name}
 
         .form-group.row
