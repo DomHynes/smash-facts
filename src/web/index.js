@@ -2,17 +2,12 @@ import { Router } from 'express';
 import games from './controllers/games';
 import facts from './controllers/facts';
 import auth from './controllers/auth';
-import { isLoggedIn } from '../lib/auth.js';
 
 export default () => {
   const router = Router();
 
   router.get('/', function (req, res) {
     res.render('index', { title: 'Home' });
-  });
-
-  router.get('/test', isLoggedIn, function (req, res) {
-    res.render('auth/login', { title: 'test' });
   });
 
   router.use('/login', auth({ router }));
