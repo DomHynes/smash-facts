@@ -4,7 +4,7 @@ import facts from './controllers/facts';
 import auth from './controllers/auth';
 import { isLoggedIn } from '../lib/auth.js';
 
-export default ({ config, db }) => {
+export default () => {
   const router = Router();
 
   router.get('/', function (req, res) {
@@ -23,7 +23,7 @@ export default ({ config, db }) => {
 
   router.use( ( req, res ) => {
     res.redirect('/');
-  })
+  });
 
 return router;
 }

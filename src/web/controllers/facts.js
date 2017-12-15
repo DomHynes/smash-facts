@@ -3,7 +3,7 @@ import facts from '../../models/facts';
 import games from '../../models/games';
 import characters from '../../models/characters';
 
-export default ({ config, db }) => {
+export default () => {
   const router = Router();
 
   router.get('/', ( req, res ) => {

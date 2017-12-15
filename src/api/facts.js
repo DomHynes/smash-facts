@@ -1,7 +1,7 @@
 import resource from 'resource-router-middleware';
 import facts from '../models/facts';
 
-export default ({ config, db }) => resource({
+export default () => resource({
 
 	/** Property name to store preloaded entity on `request`. */
 	id : 'fact',

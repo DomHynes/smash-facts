@@ -2,7 +2,7 @@ import { Router } from 'express';
 import games from '../../models/games';
 import facts from '../../models/facts';
 
-export default ({ config, db }) => {
+export default () => {
   const router = Router();
 
   router.get('/', (req, res) => {

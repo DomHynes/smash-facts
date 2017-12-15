@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import passport from 'passport';
 
-export default ({ config, db }) => {
+export default () => {
   const router = Router();
 
   router.get('/twitter', passport.authenticate('twitter'));

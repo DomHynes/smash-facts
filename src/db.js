@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import blackbird from 'blackbird';
 
 export default callback => {
   //mongoose.Promise = blackbird();
