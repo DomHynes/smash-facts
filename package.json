@@ -1,6 +1,6 @@
 {
   "name": "smashfacts",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "smash facts",
   "main": "dist",
   "scripts": {
