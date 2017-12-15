@@ -10,11 +10,11 @@ export default () => {
     res.render('index', { title: 'Home' });
   });
 
-  router.use('/login', auth({ router }));
+  router.use('/login', auth());
 
-  router.use('/games', games({ router }));
+  router.use('/games', games());
 
-  router.use('/facts', facts({ router }));
+  router.use('/facts', facts());
 
   router.use( ( req, res ) => {
     res.redirect('/');

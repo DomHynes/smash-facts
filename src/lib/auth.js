@@ -4,19 +4,19 @@ import approvedUsers from './approvedUsers.json';
 export function twitterCallback(accessToken, refreshToken, profile, cb) {
   User.findOne({ oauthID: `twitter_${profile.id}` }).exec()
     .then( (result) => {
-      if (result) {return}
+      if (result) { return result }
       else if ( approvedUsers.indexOf(profile.username.toLowerCase()) === -1 ) {
         console.log('registration denied from unapproved user: ' + profile.username )
-        return
+         return ( new Error('user not authorized'), false )
       }
       console.log('registration allowed from approved user: ' + profile.username );
-      return new User({
+       return new User({
         oauthID: `twitter_${profile.id}`,
         name: profile.username
       }).save()
     })
     .then( user => {
-      cb(null, user);
+       return cb(null, user);
     })
     .catch( cb );
 }
