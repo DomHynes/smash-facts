@@ -11,3 +11,4 @@ deploy:
  app: "smash-facts"
  env: "SmashFacts-env"
  bucket_name: "elasticbeanstalk-ap-southeast-2-628122790516"
+ skip_cleanup: true
