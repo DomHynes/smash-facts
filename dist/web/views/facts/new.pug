@@ -1,0 +1,29 @@
+extends ../layout/layout
+
+block content
+    .row
+        .col-md-8.offset-md-2
+            h1 New Fact
+            form.form(action="/facts/new" method="POST")
+                .form-group.row
+                    legend Games
+                    each game in games
+                        .form-check.col-sm-3
+                            label.form-check-label
+                                input.form-check-input(name=`${game.name}` type="checkbox")
+                                |   #{game.longName}
+                .form-group.row
+                    legend Characters
+                    each char in chars
+                        .form-check.col-sm-3
+                            label.form-check-label
+                                input.form-check-input(name=`${char.name}` type="checkbox" value="#{game._id}")
+                                |   #{char.name}
+
+                .form-group.row
+                        label.col-sm-2.col-form-label(for="fact") Text of fact
+                        .col-sm-10
+                            input#fact.form-control(name="fact")
+
+                .form-group.row
+                    button.btn.btn-primary Submit

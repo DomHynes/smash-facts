@@ -1,0 +1,10 @@
+extends ../layout/layout
+
+block content
+    h1 Games
+    each game in games
+        .card.game-card
+            img(src=`/img/boxart/${game.name}.png`).card-img-top
+            .card-body
+                h4.card-title #{game.longName}
+                a.btn.btn-primary(href=`${game.name}`) go
