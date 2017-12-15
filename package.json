@@ -32,6 +32,7 @@
   "author": "DomHynes <contact@domhyn.es>",
   "license": "MIT",
   "dependencies": {
+    "babel": "^6.23.0",
     "blackbird": "0.0.3",
     "body-parser": "^1.13.3",
     "compression": "^1.5.2",
@@ -47,10 +48,6 @@
     "resource-router-middleware": "^0.6.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.9.0",
-    "babel-core": "^6.9.0",
-    "babel-preset-es2015": "^6.9.0",
-    "babel-preset-stage-0": "^6.5.0",
     "chai": "^4.1.2",
     "dotenv": "^4.0.0",
     "eslint": "^3.1.1",
