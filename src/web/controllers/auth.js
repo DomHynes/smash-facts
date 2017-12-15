@@ -1,5 +1,17 @@
+import { Router } from 'express';
 import passport from 'passport';
 
-export function login (req, res) {
-  return passport.authenticate('twitter');
+export default ({ config, db }) => {
+  const router = Router();
+
+  router.get('/twitter', passport.authenticate('twitter'));
+
+  router.get('/twitter/callback',
+    passport.authenticate(
+      'twitter', { failureRedirect: '/' }),
+      (req, res) => res.redirect('/')
+    )
+
+  return router;
 }
+

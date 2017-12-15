@@ -20,11 +20,11 @@ export default ({ config, db }) => {
       .then( values => {
         res.render('facts/new', {title: 'new Fact', games: values[0], chars: values[1] })
       })
-  })
+  });
 
   router.post('/new', ( req, res ) => {
-
-  })
+    res.json({req: req.body })
+  });
 
   return router;
 }

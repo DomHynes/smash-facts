@@ -27,12 +27,16 @@ app.use(morgan('dev'));
 app.use( cors( { exposedHeaders: config.corsHeaders } ) );
 
 app.use(bodyParser.json( { limit : config.bodyLimit } ) );
+app.use(bodyParser.urlencoded( { extended : true } ) );
 
 passport.use(new Strategy({
   consumerKey: process.env.TWITTER_KEY,
   consumerSecret: process.env.TWITTER_SECRET,
-  callbackURL: process.env.TWITTER_CALLBACK
+  callbackURL: process.env.NODE_ENV === 'development'
+		? `http://localhost:8080${process.env.TWITTER_CALLBACK}`
+		: `http://smashfacts.domhyn.es${process.env.TWITTER_CALLBACK}`
 }, twitterCallback));
+
 passport.serializeUser( serializeUser );
 passport.deserializeUser( deserializeUser );
 app.use(session({
