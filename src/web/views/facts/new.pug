@@ -10,17 +10,18 @@ block content
                     each game in games
                         .form-check.col-sm-3
                             label.form-check-label
-                                input.form-check-input(name=`${game.name}` type="checkbox")
+                                input.form-check-input(name="games" value=`${game.name}` type="checkbox")
                                 |   #{game.longName}
                 .form-group.row
                     legend Characters
                     each char in chars
                         .form-check.col-sm-3
                             label.form-check-label
-                                input.form-check-input(name=`${char.name}` type="checkbox" value="#{game._id}")
+                                input.form-check-input(name="characters" value=`${char.name}` type="checkbox")
                                 |   #{char.name}
 
                 .form-group.row
+                        legend Fact
                         label.col-sm-2.col-form-label(for="fact") Text of fact
                         .col-sm-10
                             input#fact.form-control(name="fact")

@@ -2,17 +2,12 @@ import { Router } from 'express';
 import facts from '../../models/facts';
 import games from '../../models/games';
 import characters from '../../models/characters';
+import { isLoggedIn } from "../../lib/auth"
 
 export default () => {
   const router = Router();
 
-  router.get('/', ( req, res ) => {
-    facts.find({}, ( err, result) => {
-      res.render('games/index', { title: 'Facts', games: result});
-    })
-  });
-
-  router.get('/new', ( req,res ) => {
+  router.get('/new', isLoggedIn, ( req, res ) => {
     Promise.all([
       games.find({}).exec(),
       characters.find({}).exec()
@@ -22,7 +17,7 @@ export default () => {
       })
   });
 
-  router.post('/new', ( req, res ) => {
+  router.post('/new', isLoggedIn, ( req, res ) => {
     res.json({req: req.body })
   });
 
