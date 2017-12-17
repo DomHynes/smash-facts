@@ -27,11 +27,18 @@ export default () => resource({
 			.then( facts => {
 				//filters to only respond with facts that have requested characters
 				const characters = options.characters.split(',');
-				let resp = facts.filter(
-					fact => fact.characters.filter(
-						char => characters.includes(char.name)
-					).length > 0
-				);
+				let resp = [];
+				if ( characters.every( char => char.length > 0 )) {
+          resp = facts.filter(
+            fact => fact.characters.filter(
+              char => characters.includes(char.name)
+            ).length > 0
+          );
+				} else {
+					resp = facts;
+				}
+
+
 				res.json({ facts: resp });
 			})
 	}
