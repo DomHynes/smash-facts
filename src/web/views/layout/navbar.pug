@@ -1,4 +1,6 @@
 .navbar.navbar-expand-lg.fixed-top.navbar-dark.bg-primary
+    if locals.build !== 'production'
+            | #{locals.build}
     .container
         a.navbar-brand(href='/') SmashFacts
         button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarResponsive', aria-controls='navbarResponsive', aria-expanded='false', aria-label='Toggle navigation')
